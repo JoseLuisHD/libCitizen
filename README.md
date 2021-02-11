@@ -30,3 +30,14 @@ public class Loader extends PluginBase {
     }
 }
 ```
+
+### Building a Citizen
+
+```java
+Citizen citizen = new Citizen();
+citizen.setPosition(new Position(11, 4, 11, getServer().getDefaultLevel()));
+citizen.setYaw(20);
+citizen.setPitch(0);
+citizen.setSkin(CitizenSkin.from(new File(getDataFolder() + "/skins/").toPath().resolve("mySKin.png")));
+```
+
