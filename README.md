@@ -1,5 +1,5 @@
 # libCitizen
-Create MC Java Edition server-style NPCs in just a few lines of code.
+Personally I have always liked the styles of the npc like those that are in the Minecraft Java Edition servers, but in Minecraft Bedrock Edition it can be very complex to make them for plugin developers who are just starting out or most only decide to use line breaks. This library will help all developers to integrate npc with MC Java Edition styles to Bedrock Edition servers, besides being easier to integrate them in plugins or minigames.
 
 ##### Dependencies:
 
