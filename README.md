@@ -14,3 +14,19 @@ Create MC Java Edition server-style NPCs in just a few lines of code.
         </dependency>
      </dependencies>
 ```
+
+### Setup Example
+
+```java
+import cn.nukkit.plugin.PluginBase;
+import org.citizen.CitizenLibrary;
+
+public class Loader extends PluginBase {
+    private CitizenLibrary library;
+
+    @Override
+    public void onEnable() {
+        library = new CitizenLibrary(this);
+    }
+}
+```
