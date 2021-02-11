@@ -53,8 +53,8 @@ If you are an experienced developer or want to create your own controllers, you 
 ```java
 import org.citizen.attributes.Controllers;
 
-public class EventListener extends Controllers {
-    public EventListener(CitizenLibrary library) {
+public class MyCustomControllers extends Controllers {
+    public MyCustomControllers(CitizenLibrary library) {
         super(library);
     }
 }
