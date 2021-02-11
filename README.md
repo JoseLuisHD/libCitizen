@@ -44,7 +44,7 @@ citizen.setSkin(CitizenSkin.from(new File(getDataFolder() + "/skins/").toPath().
 ```
 
 ### Controllers
-A citizen requires help from some controllers to function properly. Currently the library adds these handlers automatically if you add the Citizen to the factory.
+A citizen requires help from some controllers to function properly. Currently the library adds these controllers automatically if you add the Citizen to the factory.
 ```java
 library.getFactory().add(citizen);
 ```
@@ -61,12 +61,11 @@ public class EventListener extends Controllers {
 ```
 Controller class example
 ```java
-public class EventListener extends Controllers {
-    public EventListener(CitizenLibrary library) {
+public class MyCustomControllers extends Controllers {
+    public MyCustomControllers(CitizenLibrary library) {
         super(library);
     }
 
-    @EventHandler(priority = EventPriority.NORMAL)
     @Override
     public void handle(DataPacketReceiveEvent event) {
         DataPacket packet = event.getPacket();
@@ -86,7 +85,6 @@ public class EventListener extends Controllers {
         }
     }
 
-    @EventHandler(priority = EventPriority.NORMAL)
     @Override
     public void handle(PlayerJoinEvent event) {
         Player player = event.getPlayer();
@@ -97,7 +95,6 @@ public class EventListener extends Controllers {
         });
     }
 
-    @EventHandler(priority = EventPriority.NORMAL)
     @Override
     public void handle(PlayerQuitEvent event) {
         Player player = event.getPlayer();
@@ -105,7 +102,6 @@ public class EventListener extends Controllers {
         getLibrary().getFactory().getCitizens().forEach((id, citizen) -> citizen.despawn(player));
     }
 
-    @EventHandler(priority = EventPriority.NORMAL)
     @Override
     public void handle(EntityLevelChangeEvent event) {
         Entity entity = event.getEntity();
@@ -139,7 +135,7 @@ public class Loader extends PluginBase {
 
     @Override
     public void onEnable() {
-        library = new CitizenLibrary(this, new MyCustomControllers());
+        library = new CitizenLibrary(this, new MyCustomControllers(library));
     }
 }
 ```
