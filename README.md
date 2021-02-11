@@ -43,16 +43,32 @@ citizen.setPitch(0);
 citizen.setSkin(CitizenSkin.from(new File(getDataFolder() + "/skins/").toPath().resolve("mySKin.png")));
 ```
 
-### Listener
-A citizen requires help from some listener events to function properly. Currently the library adds these handlers automatically if you add the Citizen to the factory.
+### Controllers
+A citizen requires help from some controllers to function properly. Currently the library adds these handlers automatically if you add the Citizen to the factory.
 ```java
 library.getFactory().add(citizen);
 ```
-If you are an experienced developer or want to create your own handlers, this is an example of the default that you can find in (https://github.com/JoseLuisHD/libCitizen/blob/main/src/main/java/org/citizen/EventListener.java)
+If you are an experienced developer or want to create your own controllers, you should extend the class to Controllers
 
 ```java
+import org.citizen.attributes.Controllers;
+
+public class EventListener extends Controllers {
+    public EventListener(CitizenLibrary library) {
+        super(library);
+    }
+}
+```
+Controller class example
+```java
+public class EventListener extends Controllers {
+    public EventListener(CitizenLibrary library) {
+        super(library);
+    }
+
     @EventHandler(priority = EventPriority.NORMAL)
-    public void onDamageEntities(DataPacketReceiveEvent event) {
+    @Override
+    public void handle(DataPacketReceiveEvent event) {
         DataPacket packet = event.getPacket();
         Player player = event.getPlayer();
 
@@ -61,7 +77,7 @@ If you are an experienced developer or want to create your own handlers, this is
             TransactionData data = ((InventoryTransactionPacket) packet).transactionData;
 
             if (data instanceof UseItemOnEntityData) {
-                Citizen citizen = library.getFactory().getCitizen(((UseItemOnEntityData) data).entityRuntimeId);
+                Citizen citizen = getLibrary().getFactory().getCitizen(((UseItemOnEntityData) data).entityRuntimeId);
 
                 if (citizen == null) return;
 
@@ -71,24 +87,27 @@ If you are an experienced developer or want to create your own handlers, this is
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
-    public void onJoin(PlayerJoinEvent event) {
+    @Override
+    public void handle(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
-        library.getFactory().getCitizens().forEach((id, citizen) -> {
+        getLibrary().getFactory().getCitizens().forEach((id, citizen) -> {
             if (citizen.getPosition().getLevel().getFolderName().equals(player.getLevel().getFolderName()))
                 citizen.spawn(player);
         });
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
-    public void onQuit(PlayerQuitEvent event) {
+    @Override
+    public void handle(PlayerQuitEvent event) {
         Player player = event.getPlayer();
 
-        library.getFactory().getCitizens().forEach((id, citizen) -> citizen.despawn(player));
+        getLibrary().getFactory().getCitizens().forEach((id, citizen) -> citizen.despawn(player));
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
-    public void onChangeLevel(EntityLevelChangeEvent event) {
+    @Override
+    public void handle(EntityLevelChangeEvent event) {
         Entity entity = event.getEntity();
 
         if (!(entity instanceof Player))
@@ -98,7 +117,7 @@ If you are an experienced developer or want to create your own handlers, this is
         Level origin = event.getOrigin();
         Level target = event.getTarget();
 
-        library.getFactory().getCitizens().forEach((id, citizen) -> {
+        getLibrary().getFactory().getCitizens().forEach((id, citizen) -> {
             String citizenLevelName = citizen.getPosition().getLevel().getFolderName();
             if (citizenLevelName.equals(origin.getFolderName()))
                 citizen.despawn(player);
@@ -107,4 +126,20 @@ If you are an experienced developer or want to create your own handlers, this is
                 citizen.spawn(player);
         });
     }
+}
+```
+
+If you create your own controllers, the initialization of the library will be different.
+```java
+import cn.nukkit.plugin.PluginBase;
+import org.citizen.CitizenLibrary;
+
+public class Loader extends PluginBase {
+    private CitizenLibrary library;
+
+    @Override
+    public void onEnable() {
+        library = new CitizenLibrary(this, new MyCustomControllers());
+    }
+}
 ```
