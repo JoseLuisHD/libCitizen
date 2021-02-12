@@ -88,7 +88,12 @@ Complete example
         library.getFactory().add(citizen);
 ```
 ![Picture](https://github.com/JoseLuisHD/libCitizen/blob/main/img/final.jpeg)
-
+To edit the text of a NameTag, you can do the following.
+```java
+citizen.getEditor().getLine(1).change("New String").sendNameTag();
+```
+In this way, the NameTag text will be updated and the players who can see the citizen will be updated with the new format.
+![Picture](https://github.com/JoseLuisHD/libCitizen/blob/main/img/edit.jpeg)
 
 ### Controllers
 A citizen requires help from some controllers to function properly. Currently the library adds these controllers automatically if you add the Citizen to the factory.
