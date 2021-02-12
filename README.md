@@ -42,6 +42,7 @@ citizen.setYaw(20);
 citizen.setPitch(0);
 citizen.setSkin(CitizenSkin.from(new File(getDataFolder() + "/skins/").toPath().resolve("mySKin.png")));
 ```
+![Picture](https://github.com/JoseLuisHD/libCitizen/blob/main/img/test1.jpeg)
 
 ### Controllers
 A citizen requires help from some controllers to function properly. Currently the library adds these controllers automatically if you add the Citizen to the factory.
