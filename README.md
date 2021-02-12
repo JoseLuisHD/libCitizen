@@ -90,11 +90,34 @@ Complete example
 ![Picture](https://github.com/JoseLuisHD/libCitizen/blob/main/img/final.jpeg)
 To edit the text of a NameTag, you can do the following.
 ```java
-citizen.getEditor().getLine(1).change("New String").sendNameTag();
+citizen.getEditor().getLine(1).rename("New String").sendNameTag();
 ```
 In this way, the NameTag text will be updated and the players who can see the citizen will be updated with the new format.
 ![Picture](https://github.com/JoseLuisHD/libCitizen/blob/main/img/edit.jpeg)
 
+### Actions
+For a citizen to execute actions when a player touches the citizen you must create a class that extends the InvokeAttribute.
+```java
+public class HandleAction extends InvokeAttribute {
+    public HandleAction(Citizen citizen) {
+        super(citizen);
+    }
+
+    @Override
+    public void invoke(@NonNull Player player) {
+        player.sendMessage("Hello world! I'm citizen " + getCitizen().getEntityId());
+    }
+}
+```
+For the citizen to call the class when the player touches him, you must add him to the citizen.
+```java
+citizen.setInvokeAttribute(new HandleAction(citizen));
+```
+If you're using the library's default controllers, citizen done! but if you are using your own controllers, to call the citizen actions you can do it this way.
+```java
+citizen.callInvoke(player);
+```
+![Picture](https://github.com/JoseLuisHD/libCitizen/blob/main/img/actions.jpeg)
 ### Controllers
 A citizen requires help from some controllers to function properly. Currently the library adds these controllers automatically if you add the Citizen to the factory.
 ```java
