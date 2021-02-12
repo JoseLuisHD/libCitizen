@@ -45,7 +45,7 @@ public class CitizenTag {
         });
     }
 
-    public CitizenTag change(String newTag) {
+    public CitizenTag rename(String newTag) {
         nameTag = newTag;
 
         return this;
