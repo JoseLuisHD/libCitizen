@@ -51,7 +51,7 @@ library.getFactory().add(citizen);
 If you are an experienced developer or want to create your own controllers, you should extend the class to Controllers
 
 ```java
-import org.citizen.attributes.Controllers;
+import org.citizen.controller.Controllers;
 
 public class MyCustomControllers extends Controllers {
     public MyCustomControllers(CitizenLibrary library) {

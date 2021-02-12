@@ -2,7 +2,8 @@ package org.citizen;
 
 import cn.nukkit.plugin.PluginBase;
 import lombok.Getter;
-import org.citizen.attributes.Controllers;
+import org.citizen.controller.Controllers;
+import org.citizen.controller.DefaultController;
 
 @Getter
 public class CitizenLibrary {
@@ -12,7 +13,7 @@ public class CitizenLibrary {
     public CitizenLibrary(PluginBase plugin) {
         this.plugin = plugin;
         this.factory = new Factory();
-        plugin.getServer().getPluginManager().registerEvents(new EventListener(this), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new DefaultController(this), plugin);
     }
 
     public CitizenLibrary(PluginBase plugin, Controllers customControllers) {

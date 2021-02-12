@@ -1,7 +1,5 @@
-package org.citizen.attributes;
+package org.citizen.controller;
 
-import cn.nukkit.event.EventHandler;
-import cn.nukkit.event.EventPriority;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.entity.EntityLevelChangeEvent;
 import cn.nukkit.event.player.PlayerJoinEvent;
@@ -16,15 +14,11 @@ import org.citizen.CitizenLibrary;
 public abstract class Controllers implements Listener {
     private final CitizenLibrary library;
 
-    @EventHandler(priority = EventPriority.NORMAL)
     public abstract void handle(DataPacketReceiveEvent event);
 
-    @EventHandler(priority = EventPriority.NORMAL)
     public abstract void handle(PlayerJoinEvent event);
 
-    @EventHandler(priority = EventPriority.NORMAL)
     public abstract void handle(PlayerQuitEvent event);
 
-    @EventHandler(priority = EventPriority.NORMAL)
     public abstract void handle(EntityLevelChangeEvent event);
 }

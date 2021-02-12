@@ -1,7 +1,9 @@
-package org.citizen;
+package org.citizen.controller;
 
 import cn.nukkit.Player;
 import cn.nukkit.entity.Entity;
+import cn.nukkit.event.EventHandler;
+import cn.nukkit.event.EventPriority;
 import cn.nukkit.event.entity.EntityLevelChangeEvent;
 import cn.nukkit.event.player.PlayerJoinEvent;
 import cn.nukkit.event.player.PlayerQuitEvent;
@@ -11,15 +13,16 @@ import cn.nukkit.inventory.transaction.data.UseItemOnEntityData;
 import cn.nukkit.level.Level;
 import cn.nukkit.network.protocol.DataPacket;
 import cn.nukkit.network.protocol.InventoryTransactionPacket;
-import org.citizen.attributes.Controllers;
+import org.citizen.CitizenLibrary;
 import org.citizen.entity.Citizen;
 
-public class EventListener extends Controllers {
-    public EventListener(CitizenLibrary library) {
+public class DefaultController extends Controllers {
+    public DefaultController(CitizenLibrary library) {
         super(library);
     }
 
     @Override
+    @EventHandler(priority = EventPriority.NORMAL)
     public void handle(DataPacketReceiveEvent event) {
         DataPacket packet = event.getPacket();
         Player player = event.getPlayer();
@@ -39,6 +42,7 @@ public class EventListener extends Controllers {
     }
 
     @Override
+    @EventHandler(priority = EventPriority.NORMAL)
     public void handle(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
@@ -49,6 +53,7 @@ public class EventListener extends Controllers {
     }
 
     @Override
+    @EventHandler(priority = EventPriority.NORMAL)
     public void handle(PlayerQuitEvent event) {
         Player player = event.getPlayer();
 
@@ -56,6 +61,7 @@ public class EventListener extends Controllers {
     }
 
     @Override
+    @EventHandler(priority = EventPriority.NORMAL)
     public void handle(EntityLevelChangeEvent event) {
         Entity entity = event.getEntity();
 
