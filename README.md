@@ -44,6 +44,20 @@ citizen.setSkin(CitizenSkin.from(new File(getDataFolder() + "/skins/").toPath().
 ```
 ![Picture](https://github.com/JoseLuisHD/libCitizen/blob/main/img/test1.jpeg)
 
+You can easily place the skins of the npcs with the CitizenSkin class that has support for normal skins and with geometry.
+```java
+        //normal
+        citizen.setSkin(CitizenSkin.from(new File(getDataFolder() + "/skins/").toPath().resolve("mySKin.png")));
+        
+        //with geometry
+        Path path = new File(getDataFolder() + "/skins/").toPath();
+        citizen.setSkin(CitizenSkin.from(
+                path.resolve("mySKin.png"),
+                path.resolve("geo.json"),
+                "custom.geo.skin")
+        );
+```
+
 ### Controllers
 A citizen requires help from some controllers to function properly. Currently the library adds these controllers automatically if you add the Citizen to the factory.
 ```java
