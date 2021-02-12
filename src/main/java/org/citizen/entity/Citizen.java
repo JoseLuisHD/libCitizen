@@ -14,8 +14,11 @@ import cn.nukkit.network.protocol.RemoveEntityPacket;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import org.citizen.attributes.EditorTag;
 import org.citizen.attributes.InvokeAttribute;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -27,11 +30,15 @@ public class Citizen {
     private Skin skin;
     private float yaw;
     private float pitch;
+    private final EditorTag editor;
     private InvokeAttribute invokeAttribute;
+
+    private final List<String> viwers = new ArrayList<>();
 
     public Citizen() {
         entityId = Entity.entityCount++;
         uuid = UUID.randomUUID();
+        editor = new EditorTag(this);
     }
 
     public void callInvoke(Player player) {
@@ -72,6 +79,11 @@ public class Citizen {
         skinPacket.uuid = getUuid();
 
         Server.broadcastPacket(Server.getInstance().getOnlinePlayers().values(), skinPacket);
+
+        editor.getLines().forEach((tag) -> tag.spawn(player));
+
+        if (!viwers.contains(player.getName()))
+            viwers.add(player.getName());
     }
 
     public void despawn(Player player) {
@@ -79,5 +91,7 @@ public class Citizen {
         packet.eid = entityId;
 
         player.dataPacket(packet);
+        editor.getLines().forEach((tag) -> tag.despawn(player));
+        viwers.remove(player.getName());
     }
 }
