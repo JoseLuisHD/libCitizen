@@ -67,6 +67,7 @@ public class MyCustomControllers extends Controllers {
     }
 
     @Override
+    @EventHandler(priority = EventPriority.NORMAL)
     public void handle(DataPacketReceiveEvent event) {
         DataPacket packet = event.getPacket();
         Player player = event.getPlayer();
@@ -86,6 +87,7 @@ public class MyCustomControllers extends Controllers {
     }
 
     @Override
+    @EventHandler(priority = EventPriority.NORMAL)
     public void handle(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
@@ -96,6 +98,7 @@ public class MyCustomControllers extends Controllers {
     }
 
     @Override
+    @EventHandler(priority = EventPriority.NORMAL)
     public void handle(PlayerQuitEvent event) {
         Player player = event.getPlayer();
 
@@ -103,6 +106,7 @@ public class MyCustomControllers extends Controllers {
     }
 
     @Override
+    @EventHandler(priority = EventPriority.NORMAL)
     public void handle(EntityLevelChangeEvent event) {
         Entity entity = event.getEntity();
 
@@ -139,3 +143,4 @@ public class Loader extends PluginBase {
     }
 }
 ```
+NOTE: If you use your own controllers, you can still use factory as a storage system.
