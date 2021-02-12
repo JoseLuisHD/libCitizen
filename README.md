@@ -74,7 +74,7 @@ citizen.getEditor().putLine("§75§f Crewmates §8// §71§f Imposter", 2);
 ```
 Complete example
 ```java
-   Citizen citizen = new Citizen();
+        Citizen citizen = new Citizen();
         citizen.setPosition(new Position(11, 4, 11, getServer().getDefaultLevel()));
         citizen.setYaw(20);
         citizen.setPitch(0);
