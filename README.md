@@ -58,6 +58,38 @@ You can easily place the skins of the npcs with the CitizenSkin class that has s
         );
 ```
 
+### NameTags
+Citizen has a simple way to place the NameTags since all the calculations work on the API side. In order to manipulate the NameTags we must access the editor option, for this it can be done in this way.
+```java
+citizen.getEditor()
+```
+Once we access the editor we can start to place the NameTags. For them we have the putLine () function, there are two ways to call the putLine () function.
+The first one only asks for the String and will add the NameTags in an ascending way with the default value of a line break.
+```java
+citizen.getEditor().putLine("§l§d*** Right-Click to Play ***");
+```
+The second form asks for String and an int which means how many lines you want to skip.
+```java
+citizen.getEditor().putLine("§75§f Crewmates §8// §71§f Imposter", 2);
+```
+Complete example
+```java
+   Citizen citizen = new Citizen();
+        citizen.setPosition(new Position(11, 4, 11, getServer().getDefaultLevel()));
+        citizen.setYaw(20);
+        citizen.setPitch(0);
+        citizen.setSkin(CitizenSkin.from(new File(getDataFolder() + "/skins/").toPath().resolve("mySKin.png")));
+
+        citizen.getEditor().putLine("§l§d*** Right-Click to Play ***");
+        citizen.getEditor().putLine("§a0 §fpeople playing...");
+        citizen.getEditor().putLine("§75§f Crewmates §8// §71§f Imposter", 2);
+        citizen.getEditor().putLine("§l§dPlay Among Us");
+
+        library.getFactory().add(citizen);
+```
+![Picture](https://github.com/JoseLuisHD/libCitizen/blob/main/img/final.jpeg)
+
+
 ### Controllers
 A citizen requires help from some controllers to function properly. Currently the library adds these controllers automatically if you add the Citizen to the factory.
 ```java
